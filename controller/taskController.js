@@ -1,7 +1,7 @@
 const Task = require("../models/Task");
 
 // Load Task from database
-exports.loadTasks = async (req, res) => {
+exports.loadTasks = async (req, res, next) => {
   try {
     await Task.find({}, (err, task) => {
       if (err) {
@@ -37,7 +37,7 @@ exports.loadTasks = async (req, res) => {
 };
 
 // Load single task from database
-exports.singleTask = async (req, res) => {
+exports.singleTask = async (req, res, next) => {
   try {
     await Task.findOne({ _id: req.params.id }, (err, task) => {
       if (err) {
@@ -64,7 +64,7 @@ exports.singleTask = async (req, res) => {
 };
 
 // Add Task to database
-exports.addTask = async (req, res) => {
+exports.addTask = async (req, res, next) => {
   try {
     const { task, description, reminder } = req.body;
     const request = { task, description, reminder };
@@ -91,7 +91,7 @@ exports.addTask = async (req, res) => {
 };
 
 //Update task in database
-exports.updateTask = async (req, res) => {
+exports.updateTask = async (req, res, next) => {
   try {
     const { task, description, reminder, date } = req.body;
     let tasks = { task, description, reminder, date };
@@ -122,7 +122,7 @@ exports.updateTask = async (req, res) => {
 };
 
 // Delete task from the database
-exports.deleteTask = async (req, res) => {
+exports.deleteTask = async (req, res, next) => {
   try {
     Task.findOneAndRemove({ _id: req.params.id }, (err, task) => {
       if (err) {

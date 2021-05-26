@@ -8,12 +8,14 @@ const PORT = process.env.PORT || 7000;
 const ENV = process.env.NODE_ENV;
 const app = express();
 
-app.use(cors())
+
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cors())
 
 //Home router
-app.get("/", (req, res) => {
+app.get("/", (req, res, next) => {
   res.status(200).json({
     message: "This is the Tasks Rest Api",
     ENV
